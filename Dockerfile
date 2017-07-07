@@ -17,11 +17,13 @@ COPY lib/springcloudstream-1.1.0-py2.py3-none-any.whl ./python-lib
 COPY *.jar ./
 COPY *.py ./
 COPY environment.yml ./
+COPY start.sh ./
+RUN chmod o+x ./start.sh
 
 ENV PYTHONPATH=./python-lib:$PYTHONPATH
 ENV PATH=/opt/conda/bin:$PATH
-RUN conda env create -f environment.yml -n default && /bin/bash -c 'source activate default'
+RUN conda env create -f environment.yml -n default
 
 VOLUME /tmp
 
-ENTRYPOINT [ "java", "-jar", "python-local-processor-rabbit-1.2.1.BUILD-SNAPSHOT.jar" ]
+ENTRYPOINT [ "./start.sh" ]
