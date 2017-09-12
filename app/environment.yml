@@ -1,0 +1,9 @@
+name: sentiment-service
+dependencies:
+  - pandas
+  - python=2.7.11
+  - requests
+  - scikit-learn
+  - pip:
+     - springcloudstream>=1.1.0
+

@@ -1,29 +1,15 @@
-FROM anapsix/alpine-java:8
+FROM continuumio/miniconda:latest
 MAINTAINER David Turanski <dturanski@pivotal.io>
+COPY app/* /app/
 
+RUN /bin/bash -c "if [ -f ./app/environment.yml ]; then conda env create --name scst-env --force --file \
+./app/environment.yml;\
+ fi"
 
-#Install dependencies
-RUN apk update && apk add bzip2 wget
+RUN if [ -f /app/requirements.txt ]; then pip install -r /app/requirements.txt; fi
 
-#Install conda
-RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh
-RUN wget --quiet https://repo.continuum.io/miniconda/Miniconda3-4.3.21-Linux-x86_64.sh -O ~/miniconda.sh
-RUN /bin/bash ~/miniconda.sh -b -p /opt/conda
-RUN rm ~/miniconda.sh
+# If testing a local build of 'springcloudstream', copy the wheel file to lib and uncomment the following lines.
+#COPY lib/* ./python-lib
+#ENV PYTHONPATH=./python-lib:$PYTHONPATH
 
-#Install springcloudstream package - Temporary for now
-
-COPY lib/springcloudstream-1.1.0-py2.py3-none-any.whl ./python-lib
-COPY *.jar ./
-COPY *.py ./
-COPY environment.yml ./
-COPY start.sh ./
-RUN chmod o+x ./start.sh
-
-ENV PYTHONPATH=./python-lib:$PYTHONPATH
-ENV PATH=/opt/conda/bin:$PATH
-RUN conda env create -f environment.yml -n default
-
-VOLUME /tmp
-
-ENTRYPOINT [ "./start.sh" ]
+CMD ["/bin/bash", "-c", "source activate scst-env && python /app/sentiment-service.py --port=9999 --monitor-port=9998 --debug"]
