@@ -1,6 +1,6 @@
 # Sentiment Analyzer
 
-A tweet sentiment analyzer using ML based on https://github.com/crawles/text-analytics-service-example . This implementation uses the [springcloudstream](https://github.com/dturanski/springcloudstream) 
+A tweet sentiment analyzer using ML based on https://github.com/crawles/text-analytics-service-example . This [implementation](../blob/master/app/sentiment-service.py) uses the [springcloudstream](https://github.com/dturanski/springcloudstream) 
 framework to bind the given function to a TCP server for easy integration with something like the Spring Cloud Stream [tcp client processor](https://github.com/spring-cloud-stream-app-starters/tcp/tree/master/spring-cloud-starter-stream-processor-tcp-client).
 
 
@@ -51,7 +51,7 @@ The output is a list of items containing the original text and a score called `p
 ````
 
 # Building and Running the Docker image
-The `Dockerfile` provided starts with an [Miniconda](https://conda.io/miniconda.html) image and creates a virtual environment specified in `app/environment.yml`.
+The `Dockerfile` provided starts with an [Miniconda](https://conda.io/miniconda.html) image and creates a virtual environment specified in [app/environment.yml](../master/blob/app/environment.yml).
 
 ````bash
 $ docker build . -t dturanski/sentiment-analyzer:latest
