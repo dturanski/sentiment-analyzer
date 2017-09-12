@@ -1,6 +1,6 @@
 # Sentiment Analyzer
 
-A tweet sentiment analyzer using ML based on [https://github.com/crawles/text-analytics-service-example]() . This implementation uses the [springcloudstream](https://github.com/dturanski/springcloudstream) 
+A tweet sentiment analyzer using ML based on https://github.com/crawles/text-analytics-service-example . This implementation uses the [springcloudstream](https://github.com/dturanski/springcloudstream) 
 framework to bind the given function to a TCP server for easy integration with something like the Spring Cloud Stream [tcp client processor](https://github.com/spring-cloud-stream-app-starters/tcp/tree/master/spring-cloud-starter-stream-processor-tcp-client).
 
 
