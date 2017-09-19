@@ -61,10 +61,4 @@ def process(data):
 
     return post_process(prediction.tolist(),tweets)
 
-import socket, logging
-
-logging.info("socket.gethostname() %s" % socket.gethostname())
-logging.info("ip long way %s" % [l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith("127.")][:1], [[(s.connect(('8.8.8.8', 53)), s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1]]) if l][0][0])
-logging.info("ip socket.gethostname(socket.gethostname()) %s" % socket.gethostbyname(socket.gethostname()))
-logging.info("ip for localhost %s" % socket.gethostbyname('localhost'))
 Processor(process, sys.argv).start()
