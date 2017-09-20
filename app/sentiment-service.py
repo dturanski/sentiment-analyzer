@@ -13,8 +13,14 @@ import pandas as pd
 import requests
 import json
 import sys
+import os
 import warnings
-from springcloudstream.tcp.stream import Processor
+
+
+if (os.environ.get('GRPC','false')=='true'):
+    from springcloudstream.grpc.stream import Processor
+else:
+    from springcloudstream.tcp.stream import Processor
 
 warnings.filterwarnings("ignore")
 
