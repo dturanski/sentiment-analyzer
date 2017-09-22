@@ -12,4 +12,4 @@ RUN if [ -f /app/requirements.txt ]; then pip install -r /app/requirements.txt; 
 #COPY lib/* ./python-lib
 #ENV PYTHONPATH=./python-lib:$PYTHONPATH
 
-CMD ["/bin/bash", "-c", "source activate scst-env && python /app/sentiment-service.py --host=localhost --port=9999 --monitor-port=9998 --debug"]
+CMD ["/bin/bash", "-c", "source activate scst-env && python /app/sentiment-service.py --port=9999 --debug"]
